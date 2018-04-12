@@ -19,27 +19,26 @@ function populateList(plates = [], platesList){
     platesList.innerHTML = plates.map(function(plate, i){
         return `
             <li>
-                <label for="item${i}">${plate.text}</label>
+                <label for="item${i}">${plate.text}</label><span data="${plate.text}">x</span>
             </li>
             `
     }).join('');
-}
+};
 
 function delFromList(elem){
     elem.onclick = function(e){
-        var target = event.target.innerText;
-            
-        for(i=0;i<items.length;i++){
-            if(target === items[i].text) {
-                items.splice(i,1);
-                localStorage.setItem("items",JSON.stringify(items));
-            }
+    var target = event.target.getAttribute('data');
+
+    for(i = 0; i < items.length; i += 1) {
+        if(target === items[i].text) {
+            items.splice(i,1);
+            localStorage.setItem("items",JSON.stringify(items));
         }
-        populateList(items, itemsList);
+    }
+    populateList(items, itemsList);
     }        
 };
-delFromList(itemsList);
 
 populateList(items, itemsList);
 addItems.addEventListener('submit', addItem);
-
+delFromList(itemsList);
