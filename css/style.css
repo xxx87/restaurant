@@ -49,7 +49,7 @@ h2 {
 }
 
 .plates label {
-/*      flex:1;*/
+      flex:1;
   cursor: pointer;
 
 }
@@ -76,9 +76,13 @@ h2 {
   outline:0;
   border:1px solid rgba(0,0,0,0.1);
 }
-span {
+img {
+    display: none;
     position: absolute;
     right: 0;
-    padding-right: 30px;
+    padding-right: 20px;
     cursor: pointer;
+}
+li:hover img {
+    display: block;
 }

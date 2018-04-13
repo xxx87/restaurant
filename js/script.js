@@ -19,7 +19,7 @@ function populateList(plates = [], platesList){
     platesList.innerHTML = plates.map(function(plate, i){
         return `
             <li>
-                <label for="item${i}">${plate.text}</label><span data="${plate.text}">x</span>
+                <label for="item${i}">${plate.text}</label><img data="${plate.text}" src="img/img_383566.png">
             </li>
             `
     }).join('');
@@ -28,7 +28,6 @@ function populateList(plates = [], platesList){
 function delFromList(elem){
     elem.onclick = function(e){
     var target = event.target.getAttribute('data');
-
     for(i = 0; i < items.length; i += 1) {
         if(target === items[i].text) {
             items.splice(i,1);
@@ -36,7 +35,7 @@ function delFromList(elem){
         }
     }
     populateList(items, itemsList);
-    }        
+    }
 };
 
 populateList(items, itemsList);
