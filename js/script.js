@@ -19,25 +19,38 @@ function populateList(plates = [], platesList){
     platesList.innerHTML = plates.map(function(plate, i){
         return `
             <li>
-                <label for="item${i}">${plate.text}</label><img data="${plate.text}" src="img/img_383566.png">
+                <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''}>
+                <label for="item${i}">${plate.text}</label>
+                <img data-index="${plate.text}" src="img/img_383566.png">
             </li>
             `
     }).join('');
 };
 
 function delFromList(elem){
-    elem.onclick = function(e){
-    var target = event.target.getAttribute('data');
+//    elem.onclick = function(e){
+    var target = event.target.getAttribute('data-index');
     for(i = 0; i < items.length; i += 1) {
         if(target === items[i].text) {
-            items.splice(i,1);
+            items.splice(i,1);  // попробовать через remove item
             localStorage.setItem("items",JSON.stringify(items));
         }
     }
     populateList(items, itemsList);
-    }
+//    }
 };
+
+function toogleDone(event){
+    var el = event.target,
+        index = el.dataset.index;
+    items[index].done = !items[index].done;
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+}
 
 populateList(items, itemsList);
 addItems.addEventListener('submit', addItem);
-delFromList(itemsList);
+//delFromList(itemsList);
+itemsList.addEventListener('click', toogleDone);
+//itemsList.addEventListener('click', delFromList);
+
