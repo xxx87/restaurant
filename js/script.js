@@ -21,14 +21,13 @@ function populateList(plates = [], platesList){
             <li>
                 <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''}>
                 <label for="item${i}">${plate.text}</label>
-                <img data-index="${plate.text}" src="img/img_383566.png">
+                <img data-index=${plate.text} src="img/img_383566.png" onclick="delFromList()">
             </li>
             `
     }).join('');
 };
 
-function delFromList(elem){
-//    elem.onclick = function(e){
+function delFromList(){
     var target = event.target.getAttribute('data-index');
     for(i = 0; i < items.length; i += 1) {
         if(target === items[i].text) {
@@ -37,7 +36,6 @@ function delFromList(elem){
         }
     }
     populateList(items, itemsList);
-//    }
 };
 
 function toogleDone(event){
@@ -50,7 +48,5 @@ function toogleDone(event){
 
 populateList(items, itemsList);
 addItems.addEventListener('submit', addItem);
-//delFromList(itemsList);
 itemsList.addEventListener('click', toogleDone);
-//itemsList.addEventListener('click', delFromList);
 
